@@ -1,13 +1,9 @@
 package cn.lcf.doc.parse;
 
 import cn.cartman.annotation.Mapping;
-import cn.cartman.annotation.Method;
 import cn.cartman.annotation.Param;
 import cn.cartman.annotation.Service;
 import cn.lcf.doc.view.*;
-import javassist.ClassPool;
-import javassist.NotFoundException;
-import sun.management.MethodInfo;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -62,16 +58,6 @@ public class Scanner {
         });
         return operations;
     }
-    public  static javassist.bytecode.MethodInfo getMethodInfo(java.lang.reflect.Method method){
-        try {
-            javassist.bytecode.MethodInfo methodInfo = ClassPool.getDefault().get(method.getDeclaringClass().getName()).getDeclaredMethod(method.getName()).getMethodInfo();
-
-            return methodInfo;
-        } catch (NotFoundException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 
     public static List<Operation> generateOperations(java.lang.reflect.Method method, Mapping mapping) {
         List<Operation> operations = new ArrayList<>();
@@ -87,11 +73,6 @@ public class Scanner {
 
     private static List<DocParam> generateDocParams(java.lang.reflect.Method method) {
         List<DocParam> docParams = new ArrayList<DocParam>();
-//        Arrays.asList(method.getParameterTypes()).forEach(clazz -> {
-//            System.out.println(clazz);
-//            System.out.println(clazz.getSimpleName());
-//        });
-        javassist.bytecode.MethodInfo methodInfo = getMethodInfo(method);
         Arrays.asList(method.getParameters()).forEach(parameter -> {
             DocParam docParam = new DocParam();
             if (parameter.isAnnotationPresent(Param.class)) {
