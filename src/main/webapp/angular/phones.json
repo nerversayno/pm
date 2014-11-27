@@ -1,0 +1,11 @@
+{"phones":[
+        {"name": "Nexus S",
+            "snippet": "Fast just got faster with Nexus S.",
+        "class":"red"},
+        {"name": "Motorola XOOM™ with Wi-Fi",
+            "snippet": "The Next, Next Generation tablet.",
+            "class":"blue"},
+        {"name": "MOTOROLA XOOM™",
+            "snippet": "The Next, Next Generation tablet.",
+            "class":"gray"}
+    ] }

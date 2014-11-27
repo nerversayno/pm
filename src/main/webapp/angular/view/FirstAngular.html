@@ -1,0 +1,37 @@
+<!DOCTYPE html >
+<html  ng-app>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="../jquery.min.js"></script>
+    <script type="text/javascript" src="../angular.js"></script>
+    <script type="text/javascript" src="../controller/controllers.js"></script>
+    <title></title>
+</head>
+<body>
+请求url:<input type="text" id="url" value="http://192.168.0.187:8082/cgp/sell">
+客户端起始编号：<input type="text" value="0" id="startNumber">
+模拟客户端数量：<input type="text" value="20" id="clientNumber">
+<button id="generateClient">生成</button>
+<button id="startAll">全部开始</button>
+<table ng-controller="ClientCtrl">
+    <tr>
+        <td>客户端</td>
+        <td>请求次数</td>
+        <td>每次上限</td>
+        <td>请求</td>
+        <td>请求结果</td>
+    </tr>
+    <tr ng-repeat="client in clients">
+        <td>{{client.name}}</td>
+        <td>{{client.number}}</td>
+        <td>{{client.random}}</td>
+        <td><button class="start">开始</button></td>
+        <td><button class="viewResult">结果</button></td>
+        <td>
+            <table class="result">
+            </table>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
