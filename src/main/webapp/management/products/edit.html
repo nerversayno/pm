@@ -1,0 +1,52 @@
+<h3>
+    产品编辑
+</h3>
+<form role="form" id="product_form">
+    <div class="form-group">
+        <a type="button" class="btn btn-danger fill_width" id="delete">删除</a>
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control fill_width" id="title" placeholder="请输入标题" required>
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control fill_width" id="imgUri" placeholder="产品样图链接" required>
+    </div>
+    <div class="form-group">
+        <ul class="nav nav-tabs" id="product_tab">
+            <li class="active">
+                <a data-toggle="tab" href="#edit_content" tabindex="-1"> 内容</a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="#preview_content" tabindex="-1">预览</a>
+            </li>
+        </ul>
+        <div class="tab-content min_height">
+            <div class="tab-pane  active " id="edit_content">
+                <pre id="editor" class="fill_width min_height" required></pre>
+            </div>
+            <div class="tab-pane  " id="preview_content">
+                <div id="preview" class="fill_width min_height"></div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <button type="submit" id='save' class="btn btn-primary fill_width" disabled>提交</button>
+    </div>
+</form>
+<div class="modal fade" id="deleteModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">删除确认</h4>
+            </div>
+            <div class="modal-body">
+                确认<span id="delete_title"></span>要删除吗？
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" id="delete_ok" class="btn btn-primary">确认</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

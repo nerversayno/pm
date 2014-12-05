@@ -1,0 +1,23 @@
+{"baseUrl": "localhost:8080","urls":[{
+        "url": "/math/add",
+        "method": "GET",
+        "type":"query",
+        "params":["a","b"],
+        "cases": [{
+            "params":[1,2],
+            "description": "1+2",
+            "expectation": 3,
+            "result":{}
+        },{
+            "params":[0,2],
+            "description":"0+2",
+            "expectation": 2,
+            "result":{}
+        },{
+            "params":[-1,2],
+            "description": "-1+2",
+            "expectation": 1,
+            "result":{}
+        }]}
+]}
+

@@ -1,0 +1,59 @@
+<h3>
+    产品管理
+</h3>
+<div class="tabbable">
+    <ul class="nav nav-tabs" id="product_tab">
+        <li ng-repeat="type in productsData">
+            <a data-toggle="tab" href="#panel-{{type.type}}"> {{type.name}}</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active" id="panel-{{type.type}}" ng-repeat="type in productsData">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>
+                        编号
+                    </th>
+                    <th>
+                        标题
+                    </th>
+                    <th>
+                        发布时间
+                    </th>
+                    <th>
+                        状态
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <br><br>
+                    <a type="submit" id='add' href="#product/{{type.type}}/-1" class="btn btn-primary fill_width">添加</a>
+                    <br><br>
+                </tr>
+                <tr ng-repeat="product in type.list">
+                    <td>
+                        {{product.index+1}}
+                    </td>
+                    <td>
+                        <a href="#product/{{product.type}}/{{product.id}}">{{product.title}}</a>
+                    </td>
+                    <td>
+                        {{product.pubDate | dateFilter}}
+                    </td>
+                    <td>
+                        {{product.status}}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <ul class="pagination">
+                <li id="page-{{page.currentNo}}" ng-repeat="page in type.pageList"><a
+                        name="{{page.currentNo}}" type="{{type.id}}"
+                        href="#page/products/{{type.id}}/{{page.currentNo}}">{{page.currentNo}}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

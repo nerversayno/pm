@@ -1,0 +1,77 @@
+{"apiVersion": "", "apis": [
+    {
+        "apiVersion": "",
+        "apis": [
+            {
+                "description": "",
+                "operations": [
+                    {
+                        "docResponseMessages": [],
+                        "method": "POST",
+                        "nickname": "operation",
+                        "notes": "",
+                        "parameters": [
+                            {
+                                "description": "operation",
+                                "name": "operation",
+                                "paramType": "body",
+                                "required": true,
+                                "type": "Operation"
+                            },
+                            {
+                                "description": "ops",
+                                "items": {},
+                                "name": "ops",
+                                "paramType": "body",
+                                "required": true,
+                                "type": "array"
+                            }
+                        ],
+                        "summary": "",
+                        "type": "Operation"
+                    }
+                ],
+                "path": "/s001/operation"
+            }
+        ],
+        "basePath": "/",
+        "description": "",
+        "models": {
+            "Operation": {
+                "id": "Operation",
+                "properties": {
+                    "docResponseMessages": {
+                        "type": "Operation"
+                    },
+                    "method": {
+                        "type": "string"
+                    },
+                    "nickname": {
+                        "type": "string"
+                    },
+                    "notes": {
+                        "type": "string"
+                    },
+                    "parameters": {
+                        "type": "Operation"
+                    },
+                    "summary": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "path": "/s001",
+        "resourcePath": ""
+    }
+], "basePath": "", "docInfo": {
+    "contact": "",
+    "description": "",
+    "license": "",
+    "licenseUrl": "",
+    "termsOfServiceUrl": "",
+    "title": ""
+}, "models": {}, "resourcePath": ""}

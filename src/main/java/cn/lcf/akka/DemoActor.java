@@ -51,8 +51,5 @@ public class DemoActor extends UntypedActor {
 
         ActorRef actorRef = system.actorOf(Props.create(WatchActor.class));
         inbox.send(actorRef,"kill");
-
-
     }
-
 }
