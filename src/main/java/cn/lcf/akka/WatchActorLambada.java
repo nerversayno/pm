@@ -30,7 +30,10 @@ public class WatchActorLambada extends AbstractActor {
         ActorRef myActor = system. actorOf(Props.create(WatchActorLambada.class),
                 "watchLambada") ;
 
-        final Inbox inbox = Inbox. create(system) ;
-        inbox. send(myActor, "a") ;
+//        final Inbox inbox = Inbox. create(system) ;
+//        inbox. send(myActor, "a") ;
+//        inbox.send(myActor,"kill");
+
+        myActor.tell("hello this is myActor",myActor);
     }
 }
