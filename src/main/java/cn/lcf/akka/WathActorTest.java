@@ -1,11 +1,11 @@
 package cn.lcf.akka;
 
-import akka.actor.ActorRef;
-import akka.actor.ActorSystem;
-import akka.actor.Props;
+import akka.actor.*;
 import akka.dispatch.Futures;
 import akka.dispatch.Mapper;
 import akka.util.Timeout;
+import javafx.concurrent.Task;
+import org.junit.Test;
 import scala.concurrent.Future;
 import scala.concurrent.duration.Duration;
 
@@ -23,6 +23,36 @@ import static akka.pattern.Patterns.pipe;
  */
 public class WathActorTest {
     public static void main(String[] args) {
+//        testReceiveTimeout();\
+        testHotSwapActor();
+    }
+
+    public static void testReceiveTimeout(){
+        final ActorSystem system = ActorSystem. create("MySystem") ;
+        ActorRef actorA = system. actorOf(Props.create(MyReceiveTimeoutUntypedActor.class), "actorA") ;
+        Inbox inbox = Inbox.create(system);
+        for (int i=0;i<20;i++){
+            try {
+                Thread.currentThread().sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            if(i==3){
+                inbox.send(actorA,"poison");
+            }
+            inbox.send(actorA,"Hello" + i);
+        }
+
+    }
+    public static void testHotSwapActor(){
+        final ActorSystem system = ActorSystem. create("MySystem") ;
+        ActorRef actorA = system. actorOf(Props.create(HotSwapActor.class), "actorA") ;
+        Inbox inbox = Inbox.create(system);
+        inbox.send(actorA, Kill.getInstance());
+        System.out.println(system.guardian().path());
+        inbox.send(actorA,"hello");
+    }
+    public  static void  testReply(){
         final ActorSystem system = ActorSystem. create("MySystem") ;
         ActorRef actorA = system. actorOf(Props.create(WatchActor.class), "actorA") ;
         ActorRef actorB = system. actorOf(Props.create(WatchActor.class), "actorB") ;
