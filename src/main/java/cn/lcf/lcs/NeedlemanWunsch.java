@@ -6,29 +6,46 @@ import java.util.Collections;
  * Created by lcf on 2015/1/8.
  */
 public class NeedlemanWunsch {
-    static String a = "GGATCG";
-    static String b = "GAATTCAGTTAA";
+    static String a = "GGATCGA";
+    static String b = "GAATTCAGTTA";
+//    static String a = "481234781";
+//    static String b = "4411327431";
 
     //A=GGATCGA，B=GAATTCAGTTA
     public static void main(String[] args) {
 //        System.out.println(LD(a.length()-1,b.length()-1));
-        int[][] arr = initLCS(a, b);
-        LCS(arr);
+        int[][] arr = new int[a.length() + 1][b.length() + 1];
+        LCS(a, b, arr);
         for (int[] ar : arr) {
             for (int a : ar) {
                 System.out.print(a + "\t");
             }
             System.out.println();
         }
-        LCSResult(arr);
+//        LCSResult(arr);
     }
-
     public static String LCSResult(int[][] arr) {
         String resultA = "";
         String resultB = "";
 
         int i = arr.length - 1;
         int j = arr[0].length - 1;
+
+        if (j == 0 || i == 0) {
+            while (i != 0) {
+                resultA += String.valueOf(a.charAt(i - 1));
+                resultB += "_";
+                i--;
+            }
+            while (j != 0) {
+                resultA += "_";
+                resultB += String.valueOf(b.charAt(j - 1));
+                j--;
+            }
+            System.out.println(new StringBuffer(resultA).reverse());
+            System.out.println(new StringBuffer(resultB).reverse());
+            return "";
+        }
         int k = Math.max(i, j) - 1;
         while (k > -1) {
             int intA = arr[i - 1][j - 1];
@@ -63,7 +80,7 @@ public class NeedlemanWunsch {
                 }
                 while (j != 0) {
                     resultA += "_";
-                    resultA += String.valueOf(b.charAt(j - 1));
+                    resultB += String.valueOf(b.charAt(j - 1));
                     j--;
                     k--;
                 }
@@ -79,7 +96,7 @@ public class NeedlemanWunsch {
         return Math.max(Math.max(a, b), c);
     }
 
-    public static void LCS(int[][] arr) {
+    public static void LCS(String a, String b, int[][] arr) {
         for (int i = 1; i < arr.length; i++) {
             for (int j = 1; j < arr[0].length; j++) {
                 if (a.charAt(i - 1) == b.charAt(j - 1)) {
@@ -103,6 +120,9 @@ public class NeedlemanWunsch {
             }
         }
         return arr;
+    }
+    public static int min(int a, int b, int c) {
+        return Math.min(Math.min(a, b), c);
     }
 }
 /*

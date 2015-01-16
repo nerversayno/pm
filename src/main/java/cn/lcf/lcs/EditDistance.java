@@ -9,17 +9,23 @@ public class EditDistance {
     static String a = "GGATCGA";
     static String b = "GAATTCAGTTAA";
 
+//    static String a = "481234781";
+//    static String b = "4411327431";
     public static void main(String[] args) {
-//        System.out.println(LD(a.length()-1,b.length()-1));
-        int[][] arr = initLD(a, b);
-        LD(arr);
+        int[][] arr = new int[2][b.length()];
+        for(int j =0; j<b.length();j++){
+            arr[0][j] = j;
+        }
+//        LD(arr);
+         LD(a, b, arr);
+        System.out.println();
         for (int[] ar : arr) {
             for (int a : ar) {
                 System.out.print(a + "\t");
             }
             System.out.println();
         }
-        LDResult(arr);
+//        LDResult(arr);
     }
 
     public static String LDResult(int[][] arr) {
@@ -28,6 +34,21 @@ public class EditDistance {
 
         int i = arr.length - 1;
         int j = arr[0].length - 1;
+        if (j == 0 || i == 0) {
+            while (i != 0) {
+                resultA += String.valueOf(a.charAt(i - 1));
+                resultB += "_";
+                i--;
+            }
+            while (j != 0) {
+                resultA += "_";
+                resultA += String.valueOf(b.charAt(j - 1));
+                j--;
+            }
+            System.out.println(new StringBuffer(resultA).reverse());
+            System.out.println(new StringBuffer(resultB).reverse());
+            return "";
+        }
         int k = Math.max(i, j) - 1;
         while (k > -1) {
             int intA = arr[i - 1][j - 1];
@@ -36,7 +57,6 @@ public class EditDistance {
             int intD = min(intA, intB, intC);
             if (intD == intA || a.charAt(i - 1) == b.charAt(j - 1)) {
                 resultA += a.charAt(i - 1);
-
                 if (a.charAt(i - 1) != b.charAt(j - 1)) {
                     resultB += String.valueOf(b.charAt(j - 1)).toLowerCase();
                 } else {
@@ -74,8 +94,8 @@ public class EditDistance {
         return "";
     }
 
-    public static int min(int a,int b,int c){
-         return Math.min(Math.min(a,b),c);
+    public static int min(int a, int b, int c) {
+        return Math.min(Math.min(a, b), c);
     }
 
     public static void LD(int[][] arr) {
@@ -88,6 +108,28 @@ public class EditDistance {
                 }
             }
         }
+    }
+
+    public static int LD(String a, String b,int[][] arr) {
+        int k = 1;
+        for (int i = 1; i < a.length()+1 ; i++) {
+            for (int j = 1; j <b.length(); j++) {
+                int prev = k == 1 ? 0 :1;
+                arr[k][0] = i;
+                if (a.charAt(i - 1) == b.charAt(j - 1)) {
+                    arr[k][j] = arr[prev][j - 1];
+                } else {
+                    arr[k][j] = Math.min(Math.min(arr[prev][j - 1], arr[prev][j]), arr[k][j - 1]) + 1;
+                }
+                System.out.print(arr[k][j] + "\t");
+            }
+            k =  k == 1 ? 0 :1;
+            System.out.println();
+        }
+        if(k == 1)
+            return  arr[0][b.length()-1];
+        else
+            return arr[1][b.length()-1];
     }
 
     public static int[][] initLD(String a, String b) {
